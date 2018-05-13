@@ -16,4 +16,4 @@ Running the tests:
 2) Select collection PetStore
 3) Select folder MAIN PART
 4) Click on “Run” button
-5) Repeat steps fro folder BONUS PART
+5) Repeat steps for folder BONUS PART
