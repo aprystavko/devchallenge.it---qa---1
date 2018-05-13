@@ -1,0 +1,900 @@
+{
+	"info": {
+		"_postman_id": "da4313c2-e8c9-4278-b548-67c4ffe5e51d",
+		"name": "PetStore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "MAIN PART",
+			"description": "",
+			"item": [
+				{
+					"name": "1_1. Add a new Pet (ID and Name)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9ff7182b-7c35-4ab9-a4fe-cd1a35d0d02e",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response from server has a body\", function () {",
+									"    pm.response.to.be.withBody;",
+									"});",
+									"",
+									"pm.test(\"Expected pet ID is present\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(510666045223516221);",
+									"});",
+									"",
+									"pm.test(\"Expected pet Name is present\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.name).to.eql('Bagira');",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 510666045223516221,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"string\"\r\n  },\r\n  \"name\": \"Bagira\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}"
+						},
+						"url": {
+							"raw": "http://petstore.swagger.io/v2/pet",
+							"protocol": "http",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1_2. Add a new Pet (full data)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "226a6f19-da3d-434f-ba15-905c89ee6391",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response from server has a body\", function () {",
+									"    pm.response.to.be.withBody;",
+									"});",
+									"",
+									"pm.test(\"Expected Pet ID is present\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(510666045223516222);",
+									"});",
+									"",
+									"pm.test(\"Expected Pet Name is present\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.name).to.eql('Chummy');",
+									"});",
+									"",
+									"pm.test(\"Expected Category Name is present\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.category.name).to.eql('Australian terrier');",
+									"});",
+									"",
+									"pm.test(\"Expected Pet Status is present\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.status).to.eql('pending');",
+									"});",
+									"",
+									"tests[\"Expected Pet Image URL is present\"] = responseBody.has(\"http://lavkapitomca.ru/wp-content/uploads/2014/07/labrador-0-431x194.jpg\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 510666045223516222,\r\n  \"category\": {\r\n    \"id\": 454,\r\n    \"name\": \"Australian terrier\"\r\n  },\r\n  \"name\": \"Chummy\",\r\n  \"photoUrls\": [\r\n    \"http://lavkapitomca.ru/wp-content/uploads/2014/07/labrador-0-431x194.jpg\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 4343,\r\n      \"name\": \"Very good dog\"\r\n    }\r\n  ],\r\n  \"status\": \"pending\"\r\n}"
+						},
+						"url": {
+							"raw": "http://petstore.swagger.io/v2/pet",
+							"protocol": "http",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2_1. Check correct Pet creation (ID + Name)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a00459f5-28a1-40ce-8c0d-35895c05ea71",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Check correct Pet creation\", function () {",
+									"    var jsonData = pm.response.json();",
+									"      pm.expect(jsonData.id).to.eql(510666045223516221);",
+									"      pm.expect(jsonData.name).to.eql('Bagira');",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://petstore.swagger.io/v2/pet/510666045223516221",
+							"protocol": "http",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"pet",
+								"510666045223516221"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2_2. Check correct Pet creation (full data)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b8ed3774-22e6-4558-bded-fa14ff1dc705",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Check correct Pet creation\", function () {",
+									"    var jsonData = pm.response.json();",
+									"      pm.expect(jsonData.id).to.eql(510666045223516222);",
+									"      pm.expect(jsonData.name).to.eql('Chummy');",
+									"      pm.expect(jsonData.category.id).to.eql(454);",
+									"      pm.expect(jsonData.category.name).to.eql('Australian terrier');",
+									"      pm.expect(jsonData.status).to.eql('pending');",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://petstore.swagger.io/v2/pet/510666045223516222",
+							"protocol": "http",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"pet",
+								"510666045223516222"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2_3. Check pending pet's status by filter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ab4087ac-5374-4fc5-8673-1da6b323067c",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response from server has a body\", function () {",
+									"    pm.response.to.be.withBody;",
+									"});",
+									"",
+									"tests[\"Expected Category name is present\"] = responseBody.has(\"Australian terrier\");",
+									"",
+									"tests[\"Expected Pet Name is present\"] = responseBody.has(\"Chummy\");",
+									"",
+									"tests[\"Expected Pet Image URL is present\"] = responseBody.has(\"http://lavkapitomca.ru/wp-content/uploads/2014/07/labrador-0-431x194.jpg\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://petstore.swagger.io/v2/pet/findByStatus?status=pending",
+							"protocol": "http",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"pet",
+								"findByStatus"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "pending"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3_1. Update Pet's name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bf8484ff-990e-41f8-b23e-ba6808e74661",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response from server has a body\", function () {",
+									"    pm.response.to.be.withBody;",
+									"});",
+									"",
+									"pm.test(\"Pet Name changed successfully\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.name).to.eql('Bagira new name');",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 510666045223516221,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"string\"\r\n  },\r\n  \"name\": \"Bagira new name\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}"
+						},
+						"url": {
+							"raw": "http://petstore.swagger.io/v2/pet",
+							"protocol": "http",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3_2. Check Pet's name after update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c0582500-17db-461f-a143-a673143885af",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response from server has a body\", function () {",
+									"    pm.response.to.be.withBody;",
+									"});",
+									"",
+									"pm.test(\"Updated Pet Name is present\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.name).to.eql('Bagira new name');",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://petstore.swagger.io/v2/pet/510666045223516221",
+							"protocol": "http",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"pet",
+								"510666045223516221"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4_1_1. Delete the Pet 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "25d8f47e-8561-40be-97a5-1c6c0716b5e2",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://petstore.swagger.io/v2/pet/510666045223516221",
+							"protocol": "http",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"pet",
+								"510666045223516221"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4_1_2. Delete the Pet 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8b6c4852-c5fc-4afa-92a3-520ca2655118",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://petstore.swagger.io/v2/pet/510666045223516222",
+							"protocol": "http",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"pet",
+								"510666045223516222"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4_2_1. Check the Pet afrer delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4d42198a-64f4-4f23-85ad-548aa8444f63",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"The Pet is deleted\", function () {",
+									"    var jsonData = pm.response.json();",
+									"     pm.expect(jsonData.message).to.eql('Pet not found');",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://petstore.swagger.io/v2/pet/510666045223516221",
+							"protocol": "http",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"pet",
+								"510666045223516221"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4_2_2. Check the Pet afrer delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "08f69c3c-62d3-4944-9aa1-3b0c59f73d5f",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"The Pet is deleted\", function () {",
+									"    var jsonData = pm.response.json();",
+									"     pm.expect(jsonData.message).to.eql('Pet not found');",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://petstore.swagger.io/v2/pet/510666045223516222",
+							"protocol": "http",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"pet",
+								"510666045223516222"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "BONUS PART",
+			"description": "",
+			"item": [
+				{
+					"name": "5_1. Create a new Pet for order in a store",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "099e6d61-7995-4214-9e25-7c9bc0f60efc",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response from server has a body\", function () {",
+									"    pm.response.to.be.withBody;",
+									"});",
+									"",
+									"pm.test(\"Expected pet ID is present\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(99484823593);",
+									"});",
+									"",
+									"pm.test(\"Expected pet Name is present\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.name).to.eql('Akuna Matara Matata');",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 99484823593,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"string\"\r\n  },\r\n  \"name\": \"Akuna Matara Matata\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}"
+						},
+						"url": {
+							"raw": "http://petstore.swagger.io/v2/pet",
+							"protocol": "http",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5_2. Create an order for a pet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e3e98142-af81-4fad-919c-b1261db67408",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response from server has a body\", function () {",
+									"    pm.response.to.be.withBody;",
+									"});",
+									"",
+									"pm.test(\"Expected Order ID is present\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(666546464);",
+									"});",
+									"",
+									"pm.test(\"Expected Quantity is present\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.quantity).to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Expected Pet ID is present\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.petId).to.eql(99484823593);",
+									"});",
+									"",
+									"pm.test(\"Order status is Placed\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.status).to.eql('placed');",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 666546464,\r\n  \"petId\": 99484823593,\r\n  \"quantity\": 1,\r\n  \"shipDate\": \"2018-05-13T19:39:11.092Z\",\r\n  \"status\": \"placed\",\r\n  \"complete\": false\r\n}"
+						},
+						"url": {
+							"raw": "http://petstore.swagger.io/v2/store/order",
+							"protocol": "http",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"store",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5_3. Check the new created order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "614e963f-2692-497b-98dc-403244717957",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response from server has a body\", function () {",
+									"    pm.response.to.be.withBody;",
+									"});",
+									"",
+									"pm.test(\"Expected Order ID is present\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(666546464);",
+									"});",
+									"",
+									"pm.test(\"Expected Quantity is present\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.quantity).to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Expected Pet ID is present\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.petId).to.eql(99484823593);",
+									"});",
+									"",
+									"pm.test(\"Order status is Placed\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.status).to.eql('placed');",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"petId\": 99484823593,\r\n  \"quantity\": 1,\r\n  \"shipDate\": \"2018-05-13T19:39:11.092Z\",\r\n  \"status\": \"placed\",\r\n  \"complete\": false\r\n}"
+						},
+						"url": {
+							"raw": "http://petstore.swagger.io/v2/store/order/666546464",
+							"protocol": "http",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"store",
+								"order",
+								"666546464"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5_4. Delete created order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6e8379c2-30c3-49f1-84b9-d56fcfef8501",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"petId\": 99484823593,\r\n  \"quantity\": 1,\r\n  \"shipDate\": \"2018-05-13T19:39:11.092Z\",\r\n  \"status\": \"placed\",\r\n  \"complete\": false\r\n}"
+						},
+						"url": {
+							"raw": "http://petstore.swagger.io/v2/store/order/666546464",
+							"protocol": "http",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"store",
+								"order",
+								"666546464"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5_5. Check deleted order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "06a8f0d2-4b50-49c6-963b-9771c602a1f4",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"petId\": 99484823593,\r\n  \"quantity\": 1,\r\n  \"shipDate\": \"2018-05-13T19:39:11.092Z\",\r\n  \"status\": \"placed\",\r\n  \"complete\": false\r\n}"
+						},
+						"url": {
+							"raw": "http://petstore.swagger.io/v2/store/order/666546464",
+							"protocol": "http",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"store",
+								"order",
+								"666546464"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5_6. Delete the pet for order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "25d8f47e-8561-40be-97a5-1c6c0716b5e2",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://petstore.swagger.io/v2/pet/99484823593",
+							"protocol": "http",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"pet",
+								"99484823593"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
